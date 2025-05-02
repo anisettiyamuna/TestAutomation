@@ -24,11 +24,17 @@ public class LoginToZoho extends TestBase {
 	public void LoginToZoho() throws InterruptedException {
 		
 		driver.findElement(By.linkText("Sign In")).click(); // base
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//input[@id='login_id']")).sendKeys(prop.getProperty("user"));
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//button[@id='nextbtn']")).click();
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//input[@id='password']")).sendKeys(prop.getProperty("pswd"));
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]")).click();
 		String Title = driver.getTitle();
-		Assert.assertEquals("Zoho Home", Title);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5000));
+		Assert.assertEquals("Home Page - Zoho CRM", Title);
 
 	}
 
