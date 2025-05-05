@@ -13,41 +13,34 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.TestBase;
+import utilities.ReadpropFile;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginToZoho extends TestBase {
 
-	public static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-
-
 	@Test(priority = 1)
 	public void LoginToZoho() throws InterruptedException {
 		
-		driver.findElement(By.linkText("Sign In")).click(); // base
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//input[@id='login_id']")).sendKeys(prop.getProperty("user"));
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//button[@id='nextbtn']")).click();
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//input[@id='password']")).sendKeys(prop.getProperty("pswd"));
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]")).click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+		
+	    ReadpropFile.waitForElementAndClick(By.linkText("Sign In")); // base
+	    
+	    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='login_id']"))).click();
+	    
+	    ReadpropFile.sendKeys(By.xpath("//input[@id='login_id']"), prop.getProperty("user"));
+	    
+	    ReadpropFile.waitForElementAndClick(By.xpath("//button[@id='nextbtn']"));
+	    
+	    ReadpropFile.sendKeys(By.xpath("//input[@id='password']"), prop.getProperty("pswd"));
+		
+	    ReadpropFile.waitForElementAndClick(By.xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]"));
+	    
+	    Thread.sleep(5000);
+		
 		String Title = driver.getTitle();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5000));
+		
 		Assert.assertEquals("Home Page - Zoho CRM", Title);
 
 	}
-
-	/*
-	 * private static void waitForElementAndClick(By locater) { WebElement element =
-	 * wait.until(ExpectedConditions.elementToBeClickable(locater));
-	 * element.click(); }
-	 * 
-	 * private static void sendKeys(By locater, String value) { WebElement element =
-	 * wait.until(ExpectedConditions.presenceOfElementLocated(locater));
-	 * wait.until(ExpectedConditions.visibilityOf(element));
-	 * element.sendKeys(value); }
-	 */
-	 
 
 }
