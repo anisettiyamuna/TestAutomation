@@ -13,33 +13,35 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.TestBase;
-import utilities.ReadpropFile;
+import utilities.ReadTestData;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginToZoho extends TestBase {
 
 	@Test(priority = 1)
-	public void LoginToZoho() throws InterruptedException {
+	public void loginToZoho() throws InterruptedException {
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 		
-	    ReadpropFile.waitForElementAndClick(By.linkText("Sign In")); // base
+		ReadTestData.waitForElementAndClick(driver,By.linkText("Sign In")); // base
 	    
 	    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='login_id']"))).click();
 	    
-	    ReadpropFile.sendKeys(By.xpath("//input[@id='login_id']"), prop.getProperty("user"));
+	    ReadTestData.sendKeys(driver,By.xpath("//input[@id='login_id']"), prop.getProperty("user"));
 	    
-	    ReadpropFile.waitForElementAndClick(By.xpath("//button[@id='nextbtn']"));
+	    ReadTestData.waitForElementAndClick(driver,By.xpath("//button[@id='nextbtn']"));
 	    
-	    ReadpropFile.sendKeys(By.xpath("//input[@id='password']"), prop.getProperty("pswd"));
+	    ReadTestData.sendKeys(driver,By.xpath("//input[@id='password']"), prop.getProperty("pswd"));
 		
-	    ReadpropFile.waitForElementAndClick(By.xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]"));
+	    ReadTestData.waitForElementAndClick(driver,By.xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]"));
 	    
 	    Thread.sleep(5000);
 		
-		String Title = driver.getTitle();
+		String actual_Title = driver.getTitle();
 		
-		Assert.assertEquals("Home Page - Zoho CRM", Title);
+		String expected_Title = "Home Page - Zoho CRM";
+		
+		Assert.assertEquals(actual_Title, expected_Title);
 
 	}
 
