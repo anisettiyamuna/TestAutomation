@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testcases.LoginToZoho">
+      <class name="test.LoginToAcademy">
         <methods>
-          <include name="LoginToZoho"/>
+          <include name="generateReport"/>
+          <include name="tearDown"/>
           <include name="setup"/>
-          <include name="teardown"/>
+          <include name="webLoginValid"/>
+          <include name="setupReport"/>
         </methods>
-      </class> <!-- testcases.LoginToZoho -->
+      </class> <!-- test.LoginToAcademy -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
