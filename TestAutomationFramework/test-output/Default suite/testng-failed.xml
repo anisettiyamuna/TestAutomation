@@ -5,10 +5,10 @@
     <classes>
       <class name="test.LoginToAcademy">
         <methods>
+          <include name="resetPassword"/>
           <include name="generateReport"/>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="webLoginValid"/>
           <include name="setupReport"/>
         </methods>
       </class> <!-- test.LoginToAcademy -->
