@@ -1,6 +1,5 @@
 package test;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -26,11 +25,14 @@ public class LoginToAcademy extends TestBase {
 	String sheetName = "LoginData";
 
 	@Test
-	public void webLoginValid() throws IOException {
+	public void webLoginValid() throws IOException, InterruptedException {
 		test = extent.createTest("Login Test - Valid User");
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-		LoginPage lp = new LoginPage(prop.getProperty("username"), prop.getProperty("password"), driver);
+
+		LoginPage lp = new LoginPage(prop.getProperty("username"), prop.getProperty("password"),
+				prop.getProperty("name"), prop.getProperty("email"), prop.getProperty("phone"), driver);
+
 		test.info("Testing with Valid Username: " + prop.getProperty("username") + ", Valid Password: "
 				+ prop.getProperty("password"));
 		lp.validLogin();
@@ -41,6 +43,7 @@ public class LoginToAcademy extends TestBase {
 		} else {
 			test.fail("Unexpected page title: " + title);
 		}
+
 	}
 
 	@Test(dataProvider = "LoginTestData")
@@ -65,4 +68,29 @@ public class LoginToAcademy extends TestBase {
 		Object data[][] = ReadTestData.getTestData(sheetName);
 		return data;
 	}
+
+	@Test
+	public void resetPassword() throws IOException, InterruptedException {
+		test = extent.createTest("Reset Password Test");
+		LoginPage lp = new LoginPage(prop.getProperty("username"), prop.getProperty("password"),
+				prop.getProperty("resetname"), prop.getProperty("resetemail"), prop.getProperty("resetphnno"), driver);
+		lp.resetPswd();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+		test.info("Name:" + prop.getProperty("resetname") + "\n Email:" + prop.getProperty("resetemail") + "\n Phn.No:"
+				+ prop.getProperty("resetphnno"));
+
+		if (prop.getProperty("resetname") == null || prop.getProperty("resetemail") == null
+				|| prop.getProperty("resetphnno") == null) {
+			test.fail("Missing data in config.properties for reset");
+			throw new RuntimeException("Missing reset config keys");
+		}
+
+		String infoText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("infoMsg"))).getText();
+		if (infoText.contains("rahulshettyacademy")) {
+			test.pass("Reset successful: " + infoText);
+		} else {
+			test.fail("Reset failed or message not found: " + infoText);
+		}
+	}
+
 }

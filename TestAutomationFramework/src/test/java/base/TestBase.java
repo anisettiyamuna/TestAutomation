@@ -66,7 +66,7 @@ public class TestBase {
 			WebDriverManager.firefoxdriver().setup(); // base
 			driver = new ChromeDriver(options); // base
 			driver.manage().window().maximize();
-			driver.get(prop.getProperty("testurl"));
+			driver.get(prop.getProperty("practiceurl"));
 		}
 
 	}
