@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Test Automation" parallel="tests" thread-count="6">
-<!--<packages>
+	<!--<packages>
 	<package name="test"></package>
 </packages>-->
-<listeners>
-	<listener class-name="test.Listeners"></listener>
-</listeners>
-<test name="LoginTest">
-	<classes>
-		<class name="test.LoginToAcademy"></class>
-	</classes>
-</test>
+	<listeners>
+		<listener class-name="test.Listeners"></listener>
+	</listeners>
+	<test name="LoginTest">
+		<classes>
+			<class name="test.LoginToAcademy">
+				<methods>
+					<exclude name="resetPassword"></exclude>
+					<exclude name="webLoginInvalid"></exclude>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
 </suite>

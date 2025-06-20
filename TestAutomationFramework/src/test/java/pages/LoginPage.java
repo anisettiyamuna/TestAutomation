@@ -12,9 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-
 import utilities.ReadTestData;
 
 public class LoginPage {
@@ -72,6 +69,15 @@ public class LoginPage {
 	public void validLogin() {
 		usrName.sendKeys(user);
 		password.sendKeys(pswd);
+		if(!privacy.isSelected())
+		{
+			privacy.click();
+		}
+		if(!rememberMe.isSelected())
+		{
+			rememberMe.click();
+		}
+		
 		signIn.click();
 
 	}

@@ -26,6 +26,7 @@ public class LoginToAcademy extends TestBase {
 
 	@Test
 	public void webLoginValid() throws IOException, InterruptedException {
+		
 		test = extent.createTest("Login Test - Valid User");
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(120));
