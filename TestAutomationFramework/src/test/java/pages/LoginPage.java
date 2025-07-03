@@ -11,10 +11,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+import utilities.AbstractComponent;
 
-import utilities.ReadTestData;
-
-public class LoginPage {
+public class LoginPage extends AbstractComponent{
 
 	@FindBy(id = "inputUsername")
 	WebElement usrName;
@@ -56,6 +55,7 @@ public class LoginPage {
 
 	public LoginPage(String user, String pswd, String name, String email, String phone, WebDriver driver) {
 		// TODO Auto-generated constructor stub
+		super(driver);
 		this.driver = driver;
 		this.user = user;
 		this.pswd = pswd;

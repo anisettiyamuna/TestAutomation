@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="2" total="3" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-06-20T17:06:12 IST" name="Default suite" finished-at="2025-06-20T17:06:22 IST" duration-ms="9959">
+  <suite started-at="2025-07-03T15:41:13 IST" name="Test Automation" finished-at="2025-07-03T15:41:28 IST" duration-ms="14028">
     <groups>
     </groups>
-    <test started-at="2025-06-20T17:06:12 IST" name="Default test" finished-at="2025-06-20T17:06:22 IST" duration-ms="9959">
-      <class name="test.LoginToAcademy">
-        <test-method is-config="true" signature="setupReport()[pri:0, instance:test.LoginToAcademy@d86a6f]" started-at="2025-06-20T17:06:12 IST" name="setupReport" finished-at="2025-06-20T17:06:13 IST" duration-ms="460" status="PASS">
+    <test started-at="2025-07-03T15:41:13 IST" name="Products" finished-at="2025-07-03T15:41:28 IST" duration-ms="14028">
+      <class name="test.ProductCatalogue">
+        <test-method is-config="true" signature="setupReport()[pri:0, instance:test.ProductCatalogue@2794eab6]" started-at="2025-07-03T15:41:13 IST" name="setupReport" finished-at="2025-07-03T15:41:14 IST" duration-ms="597" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupReport -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:test.LoginToAcademy@d86a6f]" started-at="2025-06-20T17:06:13 IST" name="setup" finished-at="2025-06-20T17:06:19 IST" duration-ms="6551" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="webLoginValid()[pri:0, instance:test.LoginToAcademy@d86a6f]" started-at="2025-06-20T17:06:19 IST" name="webLoginValid" finished-at="2025-06-20T17:06:21 IST" duration-ms="1933" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- webLoginValid -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:test.LoginToAcademy@d86a6f]" started-at="2025-06-20T17:06:21 IST" name="tearDown" finished-at="2025-06-20T17:06:22 IST" duration-ms="499" status="PASS">
+        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:test.ProductCatalogue@2794eab6]" started-at="2025-07-03T15:41:14 IST" name="setup" finished-at="2025-07-03T15:41:20 IST" duration-ms="5708" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=webLoginValid status=SUCCESS method=LoginToAcademy.webLoginValid()[pri:0, instance:test.LoginToAcademy@d86a6f] output={null}]]]>
+                <![CDATA[https://rahulshettyacademy.com/client/]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="submitOrder()[pri:0, instance:test.ProductCatalogue@2794eab6]" started-at="2025-07-03T15:41:20 IST" name="submitOrder" finished-at="2025-07-03T15:41:26 IST" duration-ms="6661" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- submitOrder -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:test.ProductCatalogue@2794eab6]" started-at="2025-07-03T15:41:26 IST" name="tearDown" finished-at="2025-07-03T15:41:27 IST" duration-ms="367" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=submitOrder status=SUCCESS method=ProductCatalogue.submitOrder()[pri:0, instance:test.ProductCatalogue@2794eab6] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="generateReport()[pri:0, instance:test.LoginToAcademy@d86a6f]" started-at="2025-06-20T17:06:22 IST" name="generateReport" finished-at="2025-06-20T17:06:22 IST" duration-ms="478" status="PASS">
+        <test-method is-config="true" signature="generateReport()[pri:0, instance:test.ProductCatalogue@2794eab6]" started-at="2025-07-03T15:41:27 IST" name="generateReport" finished-at="2025-07-03T15:41:28 IST" duration-ms="654" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- generateReport -->
-      </class> <!-- test.LoginToAcademy -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+      </class> <!-- test.ProductCatalogue -->
+    </test> <!-- Products -->
+  </suite> <!-- Test Automation -->
 </testng-results>
