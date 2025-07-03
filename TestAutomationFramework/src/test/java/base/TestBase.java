@@ -19,6 +19,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -37,12 +39,16 @@ public class TestBase {
 
 	@BeforeTest
 	public void setupReport() {
+//		System.out.println(System.getProperty("java.version"));
+
 		System.out.println("Freemarker version: " + freemarker.template.Configuration.getVersion());
 		extent = ExtentReportManager.getReportInstance();
+
 	}
 
 	@BeforeMethod
-	public void setup() throws IOException, InterruptedException {
+	@Parameters("loginUrl")
+	public void setup(String loginUrl) throws IOException, InterruptedException {
 
 		if (driver == null) {
 			fr = new FileReader(
@@ -58,7 +64,7 @@ public class TestBase {
 			driver = new ChromeDriver(options); // base
 //			driver.manage().window().maximize();
 //			driver.manage().deleteAllCookies();
-			driver.get(prop.getProperty("practiceurl"));
+			driver.get(loginUrl);
 
 			Thread.sleep(1000);
 		} else if (prop.getProperty("browser").equalsIgnoreCase("firefox")) {
@@ -66,7 +72,9 @@ public class TestBase {
 			WebDriverManager.firefoxdriver().setup(); // base
 			driver = new ChromeDriver(options); // base
 			driver.manage().window().maximize();
-			driver.get(prop.getProperty("practiceurl"));
+			driver.get(loginUrl);
+
+//			driver.get(prop.getProperty("practiceurl"));
 		}
 
 	}

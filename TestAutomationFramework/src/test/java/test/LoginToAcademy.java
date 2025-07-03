@@ -18,15 +18,38 @@ import org.testng.annotations.Test;
 import base.TestBase;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.LoginPage;
-import utilities.ReadTestData;
+import utilities.AbstractComponent;
 
 public class LoginToAcademy extends TestBase {
 
 	String sheetName = "LoginData";
 
+	@Test(dataProvider = "LoginTestData")
+	public void webLoginInvalid(String invalid_user, String invalid_password) throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+		test = extent.createTest("Login Test - Invalid User");
+		test.info("Testing with Invalid Username: " + invalid_user + ", Invalid Password: " + invalid_password);
+		AbstractComponent.sendKeys(driver, By.id("inputUsername"), invalid_user);
+		AbstractComponent.sendKeys(driver, By.name("inputPassword"), invalid_password);
+		AbstractComponent.clickElement(driver, By.className("signInBtn"));
+		String errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error"))).getText();
+		if (errorMsg.contains("Incorrect username")) {
+			test.pass("App correctly rejected invalid login. Error shown: " + errorMsg);
+		} else {
+			test.fail("App accepted invalid credentials. Error shown: " + errorMsg);
+		}
+
+	}
+
+	@DataProvider(name = "LoginTestData")
+	public Object[][] getData() {
+		Object data[][] = AbstractComponent.getTestData(sheetName);
+		return data;
+	}
+
 	@Test
 	public void webLoginValid() throws IOException, InterruptedException {
-		
+
 		test = extent.createTest("Login Test - Valid User");
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(120));
@@ -47,30 +70,7 @@ public class LoginToAcademy extends TestBase {
 
 	}
 
-	@Test(dataProvider = "LoginTestData")
-	public void webLoginInvalid(String invalid_user, String invalid_password) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-		test = extent.createTest("Login Test - Invalid User");
-		test.info("Testing with Invalid Username: " + invalid_user + ", Invalid Password: " + invalid_password);
-		ReadTestData.sendKeys(driver, By.id("inputUsername"), invalid_user);
-		ReadTestData.sendKeys(driver, By.name("inputPassword"), invalid_password);
-		ReadTestData.clickElement(driver, By.className("signInBtn"));
-		String errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error"))).getText();
-		if (errorMsg.contains("Incorrect username")) {
-			test.pass("App correctly rejected invalid login. Error shown: " + errorMsg);
-		} else {
-			test.fail("App accepted invalid credentials. Error shown: " + errorMsg);
-		}
-
-	}
-
-	@DataProvider(name = "LoginTestData")
-	public Object[][] getData() {
-		Object data[][] = ReadTestData.getTestData(sheetName);
-		return data;
-	}
-
-	@Test
+	@Test(enabled = true)
 	public void resetPassword() throws IOException, InterruptedException {
 		test = extent.createTest("Reset Password Test");
 		LoginPage lp = new LoginPage(prop.getProperty("username"), prop.getProperty("password"),

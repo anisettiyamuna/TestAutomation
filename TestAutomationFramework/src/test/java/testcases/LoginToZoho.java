@@ -13,7 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.TestBase;
-import utilities.ReadTestData;
+import utilities.AbstractComponent;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginToZoho extends TestBase {
@@ -23,17 +23,17 @@ public class LoginToZoho extends TestBase {
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 		
-		ReadTestData.waitForElementAndClick(driver,By.linkText("Sign In")); // base
+		AbstractComponent.waitForElementAndClick(driver,By.linkText("Sign In")); // base
 	    
 	    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='login_id']"))).click();
 	    
-	    ReadTestData.sendKeys(driver,By.xpath("//input[@id='login_id']"), prop.getProperty("user"));
+	    AbstractComponent.sendKeys(driver,By.xpath("//input[@id='login_id']"), prop.getProperty("user"));
 	    
-	    ReadTestData.waitForElementAndClick(driver,By.xpath("//button[@id='nextbtn']"));
+	    AbstractComponent.waitForElementAndClick(driver,By.xpath("//button[@id='nextbtn']"));
 	    
-	    ReadTestData.sendKeys(driver,By.xpath("//input[@id='password']"), prop.getProperty("pswd"));
+	    AbstractComponent.sendKeys(driver,By.xpath("//input[@id='password']"), prop.getProperty("pswd"));
 		
-	    ReadTestData.waitForElementAndClick(driver,By.xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]"));
+	    AbstractComponent.waitForElementAndClick(driver,By.xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]"));
 	    
 	    Thread.sleep(5000);
 		

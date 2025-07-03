@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite thread-count="6" parallel="tests" name="Failed suite [Test Automation]" guice-stage="DEVELOPMENT">
+<suite name="Failed suite [Test Automation]" guice-stage="DEVELOPMENT">
   <listeners>
     <listener class-name="test.Listeners"/>
   </listeners>
-  <test thread-count="6" parallel="tests" name="LoginTest(failed)">
+  <test thread-count="5" name="Products(failed)">
+    <parameter name="loginUrl" value="https://rahulshettyacademy.com/client/"/>
     <classes>
-      <class name="test.LoginToAcademy">
+      <class name="test.ProductCatalogue">
         <methods>
           <include name="generateReport"/>
+          <include name="submitOrder"/>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="webLoginValid"/>
           <include name="setupReport"/>
         </methods>
-      </class> <!-- test.LoginToAcademy -->
+      </class> <!-- test.ProductCatalogue -->
     </classes>
-  </test> <!-- LoginTest(failed) -->
+  </test> <!-- Products(failed) -->
 </suite> <!-- Failed suite [Test Automation] -->
