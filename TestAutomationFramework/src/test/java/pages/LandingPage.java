@@ -10,12 +10,9 @@ public class LandingPage {
 	String pswd;
 	WebDriver driver;
 
-	public LandingPage(WebDriver driver, String email, String pswd) {
+	public LandingPage(WebDriver driver) {
 
 		this.driver = driver;
-		this.email = email;
-		this.pswd = pswd;
-
 		PageFactory.initElements(driver, this);
 	}
 
@@ -28,9 +25,11 @@ public class LandingPage {
 	@FindBy(id = "login")
 	WebElement signin;
 
-	public void loginToApp() {
+	public ProductCatPage loginToApp(String email, String pswd) {
 		user.sendKeys(email);
 		password.sendKeys(pswd);
 		signin.click();
+		ProductCatPage productCatPage = new ProductCatPage(driver);
+		return productCatPage;
 	}
 }

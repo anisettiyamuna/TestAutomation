@@ -12,6 +12,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.TestBase;
+import pages.CartPage;
+import pages.CheckoutPage;
+import pages.ConfirmationPage;
 import pages.LandingPage;
 import pages.ProductCatPage;
 import utilities.AbstractComponent;
@@ -26,38 +29,43 @@ public class ProductCatalogue extends TestBase {
 	public void submitOrder() throws InterruptedException {
 
 		String prodName = "ZARA COAT 3";
+		String countryName = "India";
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		test = extent.createTest("SubmitOrder - Products");
-
+		LandingPage landingPage = new LandingPage(driver);
 		// Initialize LandingPage with driver and credentials
-		LandingPage landingPage = new LandingPage(driver, prop.getProperty("email"), prop.getProperty("password"));
-
-		// Perform login action
-		landingPage.loginToApp();
-		test.pass("Login Successful");
+		ProductCatPage productCatPage = landingPage.loginToApp(prop.getProperty("email"), prop.getProperty("password"));
 		String title = driver.getTitle();
 		if (title.contains("Shop")) {
-			test.pass("Landed on expected page after login");
+			
+			System.out.println("Landed on expected page after login");
 		} else {
-			test.fail("Unexpected page title: " + title);
+			System.out.println("Unexpected page title: " + title);
 		}
-
-		// Creating object for ProductCatPage
-		ProductCatPage productCatPage = new ProductCatPage(driver);
 
 		// Storing the product-list in products object
 		productCatPage.getProductsList();
-		test.info("Products stored successful");
 
 		// Getting the product from product-list and add to cart
 		productCatPage.getProductName(prodName);
-		test.info("Filtered the Zara product from the product list");
+	//	test.info("Filtered the Zara product from the product list.");
 		productCatPage.addProductToCart(prodName);
+		CartPage cartPage = productCatPage.goToCart();
 
 		// Getting the cart product-list
-		productCatPage.getCartProductsList();
-		productCatPage.convertWebElementToArrayList(prodName);
-		productCatPage.checkOutPlaceOrder();
-
+		cartPage.getCartProductsList();
+		boolean match=cartPage.convertWebElementToArrayList(prodName);
+		
+		if (match) {
+			System.out.println("Product is present in the cart.");
+		    // Continue with assertions or further steps
+		} else {
+			System.out.println("Product not found in the cart.");
+		}
+		CheckoutPage checkoutPage = cartPage.goTocheckOut();
+		checkoutPage.selectCountry(countryName);
+		
+		ConfirmationPage confirmationPage = checkoutPage.submit();
+		String confirmMessage = confirmationPage.getConfirmationMessage();
+		Assert.assertTrue(confirmMessage.equalsIgnoreCase("Thankyou for the order."));
 	}
 }

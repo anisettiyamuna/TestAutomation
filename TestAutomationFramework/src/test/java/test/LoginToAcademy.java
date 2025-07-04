@@ -27,16 +27,14 @@ public class LoginToAcademy extends TestBase {
 	@Test(dataProvider = "LoginTestData")
 	public void webLoginInvalid(String invalid_user, String invalid_password) throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-		test = extent.createTest("Login Test - Invalid User");
-		test.info("Testing with Invalid Username: " + invalid_user + ", Invalid Password: " + invalid_password);
 		AbstractComponent.sendKeys(driver, By.id("inputUsername"), invalid_user);
 		AbstractComponent.sendKeys(driver, By.name("inputPassword"), invalid_password);
 		AbstractComponent.clickElement(driver, By.className("signInBtn"));
 		String errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error"))).getText();
 		if (errorMsg.contains("Incorrect username")) {
-			test.pass("App correctly rejected invalid login. Error shown: " + errorMsg);
+			System.out.println("App correctly rejected invalid login. Error shown: " + errorMsg);
 		} else {
-			test.fail("App accepted invalid credentials. Error shown: " + errorMsg);
+			System.out.println("App accepted invalid credentials. Error shown: " + errorMsg);
 		}
 
 	}
@@ -50,47 +48,40 @@ public class LoginToAcademy extends TestBase {
 	@Test
 	public void webLoginValid() throws IOException, InterruptedException {
 
-		test = extent.createTest("Login Test - Valid User");
-
 		wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
 		LoginPage lp = new LoginPage(prop.getProperty("username"), prop.getProperty("password"),
 				prop.getProperty("name"), prop.getProperty("email"), prop.getProperty("phone"), driver);
 
-		test.info("Testing with Valid Username: " + prop.getProperty("username") + ", Valid Password: "
-				+ prop.getProperty("password"));
 		lp.validLogin();
-		test.pass("Entered credentials and clicked login");
+		System.out.println("Entered credentials and clicked login");
 		String title = driver.getTitle();
 		if (title.contains("Academy")) {
-			test.pass("Landed on expected page after login");
+			System.out.println("Landed on expected page after login");
 		} else {
-			test.fail("Unexpected page title: " + title);
+			System.out.println("Unexpected page title: " + title);
 		}
 
 	}
 
 	@Test(enabled = true)
 	public void resetPassword() throws IOException, InterruptedException {
-		test = extent.createTest("Reset Password Test");
 		LoginPage lp = new LoginPage(prop.getProperty("username"), prop.getProperty("password"),
 				prop.getProperty("resetname"), prop.getProperty("resetemail"), prop.getProperty("resetphnno"), driver);
 		lp.resetPswd();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-		test.info("Name:" + prop.getProperty("resetname") + "\n Email:" + prop.getProperty("resetemail") + "\n Phn.No:"
-				+ prop.getProperty("resetphnno"));
-
+		
 		if (prop.getProperty("resetname") == null || prop.getProperty("resetemail") == null
 				|| prop.getProperty("resetphnno") == null) {
-			test.fail("Missing data in config.properties for reset");
+			System.out.println("Missing data in config.properties for reset");
 			throw new RuntimeException("Missing reset config keys");
 		}
 
 		String infoText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("infoMsg"))).getText();
 		if (infoText.contains("rahulshettyacademy")) {
-			test.pass("Reset successful: " + infoText);
+			System.out.println("Reset successful: " + infoText);
 		} else {
-			test.fail("Reset failed or message not found: " + infoText);
+			System.out.println("Reset failed or message not found: " + infoText);
 		}
 	}
 

@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Loan Department" parallel="tests" thread-count="6">
 	<listeners>
-		<listener class-name="test.Listeners" />
+		<listener class-name="listeners.ExtentReportListeners" />
 	</listeners>
 	<test name="Personal loan">
 		<parameter name="URL" value="personalloan.com" />

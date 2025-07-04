@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Test Automation">
 	<listeners>
-		<listener class-name="test.Listeners"></listener>
+		<listener class-name="listeners.ExtentReportListeners" />
 	</listeners>
 	<test name="Products">
 		<parameter name="loginUrl" value="https://rahulshettyacademy.com/client/" />
