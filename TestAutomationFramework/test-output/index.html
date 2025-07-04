@@ -145,7 +145,7 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;Test Automation&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;listeners&gt;
-    &lt;listener class-name=&quot;test.Listeners&quot;/&gt;
+    &lt;listener class-name=&quot;listeners.ExtentReportListeners&quot;/&gt;
   &lt;/listeners&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Products&quot;&gt;
     &lt;parameter name=&quot;loginUrl&quot; value=&quot;https://rahulshettyacademy.com/client/&quot;/&gt;
@@ -194,12 +194,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'submitOrder')
 data.setCell(0, 2, 'test.ProductCatalogue')
-data.setCell(0, 3, 6661);
+data.setCell(0, 3, 5025);
 window.suiteTableData['Test_Automation']= { tableData: data, tableDiv: 'times-div-Test_Automation'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 seconds</span>
+              <span class="suite-total-time">Total running time: 5 seconds</span>
               <div id="times-div-Test_Automation">
               </div> <!-- times-div-Test_Automation -->
             </div> <!-- times-div -->
@@ -226,26 +226,18 @@ return data;
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
               <div class="chronological-class-name">test.ProductCatalogue</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">setupReport</span>
-                <span class="method-start">0 ms</span>
-              </div> <!-- configuration-test before -->
               <div class="configuration-method before">
                 <span class="method-name">setup(https://rahulshettyacademy.com/client/)</span>
-                <span class="method-start">620 ms</span>
+                <span class="method-start">0 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">submitOrder</span>
-                <span class="method-start">6331 ms</span>
+                <span class="method-start">8594 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDown([TestResult name=submitOrder status=SUCCESS method=ProductCatalogue.submitOrder()[pri:0, instance:te...)</span>
-                <span class="method-start">12995 ms</span>
+                <span class="method-name">tearDown</span>
+                <span class="method-start">13628 ms</span>
               </div> <!-- configuration-method after -->
-              <div class="configuration-test after">
-                <span class="method-name">generateReport</span>
-                <span class="method-start">13365 ms</span>
-              </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

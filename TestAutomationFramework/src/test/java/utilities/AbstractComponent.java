@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import base.TestBase;
+import pages.CartPage;
 
 public class AbstractComponent extends TestBase {
 	static WebDriver driver;
@@ -43,7 +44,7 @@ public class AbstractComponent extends TestBase {
 	@FindBy(xpath = "(//button[@routerlink='/dashboard/cart'])[1]")
 	WebElement cart;
 
-	public void goToCart() {
+	public void goToCartPage() {
 		cart.click();
 	}
 
@@ -101,7 +102,7 @@ public class AbstractComponent extends TestBase {
 	}
 
 	public static void clickElement(WebDriver driver, By locator) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
 	}
 

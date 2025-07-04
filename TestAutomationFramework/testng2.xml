@@ -5,7 +5,7 @@
 	<package name="test"></package>
 </packages>-->
 	<listeners>
-		<listener class-name="test.Listeners"></listener>
+		<listener class-name="listeners.ExtentReportListeners" />
 	</listeners>
 	<test name="LoginTest">
 		<parameter name="loginUrl" value="https://rahulshettyacademy.com/locatorspractice/" />
