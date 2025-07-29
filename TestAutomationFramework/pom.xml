@@ -131,7 +131,7 @@
 		</profile>
 
 		<profile>
-			<id>HRrequest</id>
+			<id>ProductCatalogue</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -140,7 +140,7 @@
 						<version>3.0.0-M6</version>
 						<configuration>
 							<suiteXmlFiles>
-								<suiteXmlFile>testSuites/HRrequest.xml</suiteXmlFile>
+								<suiteXmlFile>testSuites/ProductCatalogue.xml</suiteXmlFile>
 							</suiteXmlFiles>
 						</configuration>
 					</plugin>
