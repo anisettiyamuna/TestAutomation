@@ -39,14 +39,17 @@ public class TestBase {
 	@BeforeMethod
 	@Parameters("loginUrl")
 	public void setup(String loginUrl) throws IOException, InterruptedException {
-
+		String url = loginUrl != null ? loginUrl :  prop.getProperty("practiceurl");
+		
 		if (driver == null) {
 			fr = new FileReader(
 					"C:\\Users\\ADMIN\\eclipse-workspace\\TestAutomation\\TestAutomationFramework\\src\\test\\resources\\configfiles\\config.properties");
 			prop.load(fr);
 		}
-
-		if (prop.getProperty("browser").equalsIgnoreCase("chrome")) {
+		
+		String browserName = System.getProperty("browser")!=null ? System.getProperty("browser") : prop.getProperty("browser");
+		
+		if (browserName.equalsIgnoreCase("chrome")) {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--incognito");
 			options.addArguments("start-maximized");// base
@@ -54,19 +57,15 @@ public class TestBase {
 			driver = new ChromeDriver(options); // base
 //			driver.manage().window().maximize();
 //			driver.manage().deleteAllCookies();
-			driver.get(loginUrl);
-
-			Thread.sleep(1000);
+			
 		} else if (prop.getProperty("browser").equalsIgnoreCase("firefox")) {
 			ChromeOptions options = new ChromeOptions(); // base
 			WebDriverManager.firefoxdriver().setup(); // base
-			driver = new ChromeDriver(options); // base
 			driver.manage().window().maximize();
-			driver.get(loginUrl);
-
 //			driver.get(prop.getProperty("practiceurl"));
 		}
-
+		
+		driver.get(url);
 	}
 
 	@AfterMethod
